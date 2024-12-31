@@ -1,0 +1,66 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facial Expression Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #video-container {
+            margin: 20px 0;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        #start {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #stop {
+            background-color: #f44336;
+            color: white;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Facial Expression Analysis</h1>
+    
+    <div id="video-container">
+        <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    </div>
+    
+    <div>
+        <button id="start" class="button">Start Analysis</button>
+        <button id="stop" class="button">Stop Analysis</button>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('start');
+        const stopButton = document.getElementById('stop');
+
+        startButton.addEventListener('click', async () => {
+            const response = await fetch('/start');
+            if (response.ok) {
+                startButton.style.display = 'none';
+                stopButton.style.display = 'inline-block';
+            }
+        });
+
+        stopButton.addEventListener('click', () => {
+            window.location.href = '/stop';
+        });
+    </script>
+</body>
+</html>
+

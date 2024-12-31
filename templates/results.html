@@ -1,0 +1,49 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .result-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .expression {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .button {
+            padding: 10px 20px;
+            margin: 20px 0;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #2196F3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Analysis Results</h1>
+    
+    <div class="result-container">
+        {% for expression, percentage in results.items() %}
+        <div class="expression">
+            <strong>{{ expression|title }}:</strong> {{ "%.2f"|format(percentage) }}% of time
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a href="{{ url_for('index') }}" class="button">Start New Analysis</a>
+</body>
+</html>
